@@ -1,0 +1,7 @@
+version: "2.3"
+services:
+  web:
+    image: moonlay/loyalti.merchant:${TAG:-tags-1.0.0}
+    container_name: loyalti.merchant
+    ports:
+      - 2525:2525
