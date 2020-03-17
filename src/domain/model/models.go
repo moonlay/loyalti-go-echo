@@ -158,6 +158,7 @@ type Outlet struct {
 	OutletDay        time.Time  `json:"outlet_day"`
 	OutletHour       time.Time  `json:"outlet_hour"`
 	MerchantId       int        `json:"merchant_id"`
+	Timezone         string     `json:"timezone"`
 }
 
 type Program struct {
@@ -179,15 +180,21 @@ type Program struct {
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	//MerchantName       string     `json:"merchant_name"`
-	CategoryId        int      `json:"category_id"`
-	Benefit           *string  `json:"benefit"`
-	TermsAndCondition *string  `json:"terms_and_condition"`
-	Tier              *string  `json:"tier"`
-	RedeemRules       *string  `json:"redeem_rules"`
-	RewardTarget      *float64 `json:"reward_target"`
-	QRCodeId          *string  `json:"qr_code_id"`
-	ProgramPoint      *int     `json:"program_point"`
-	MinPayment        *int     `json:"min_payment"`
+	CategoryId            int      `json:"category_id"`
+	Benefit               *string  `json:"benefit"`
+	TermsAndCondition     *string  `json:"terms_and_condition"`
+	Tier                  *string  `json:"tier"`
+	RedeemRules           *string  `json:"redeem_rules"`
+	RewardTarget          *float64 `json:"reward_target"`
+	QRCodeId              *string  `json:"qr_code_id"`
+	ProgramPoint          *int     `json:"program_point"`
+	MinPayment            *int     `json:"min_payment"`
+	IsReqBillNumber       bool     `json:"is_req_bill_number"`
+	IsReqTotalTransaction bool     `json:"is_req_total_transaction"`
+	IsPushNotification    bool     `json:"is_push_notification"`
+	IsLendCard            bool     `json:"is_lend_card"`
+	IsGiveCard            bool     `json:"is_give_card"`
+	IsWelcomeBonus        bool     `json:"is_welcome_bonus"`
 }
 
 type SpecialProgram struct {
@@ -328,6 +335,7 @@ type Card struct {
 	IconImageStamp    string     `json:"icon_image_stamp"`
 	MerchantId        int        `json:"merchant_id"`
 	Tier              string     `json:"tier"`
+	TemplatePattern   string     `json:"template_pattern"`
 }
 
 type Member struct {
@@ -337,29 +345,38 @@ type Member struct {
 }
 
 type Voucher struct {
-	Id         string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
-	Created    time.Time  `json:"created"`
-	CreatedBy  string     `json:"created_by"`
-	Modified   time.Time  `json:"modified"`
-	ModifiedBy string     `json:"modified_by"`
-	Active     bool       `json:"active"`
-	IsDeleted  bool       `json:"is_deleted"`
-	Deleted    *time.Time `json:"deleted"`
-	DeletedBy  string     `json:"deleted_by"`
+	Id                       string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created                  time.Time  `json:"created"`
+	CreatedBy                string     `json:"created_by"`
+	Modified                 time.Time  `json:"modified"`
+	ModifiedBy               string     `json:"modified_by"`
+	Active                   bool       `json:"active"`
+	IsDeleted                bool       `json:"is_deleted"`
+	Deleted                  *time.Time `json:"deleted"`
+	DeletedBy                string     `json:"deleted_by"`
+	VoucherName              string     `json:"voucher_name"`
+	StartDate                time.Time  `json:"start_date"`
+	EndDate                  time.Time  `json:"end_date"`
+	VoucherDescription       string     `json:"voucher_description"`
+	VoucherTermsAndCondition string     `json:"voucher_terms_and_condition"`
+	IsPushNotification       bool       `json:"is_push_notification"`
+	IsGiveVoucher            bool       `json:"is_give_voucher"`
+	VoucherPeriod            string     `json:"voucher_period"`
+	RewardTermsAndCondition  string     `json:"reward_terms_and_condition"`
+	BackgroundVoucherPattern string     `json:"background_voucher"`
+	BackgroundVoucherColour  string     `json:"background_voucher_colour"`
+	MerchantId               string     `json:"merchant_id"`
+	OutletId                 string     `json:"outlet_id"`
+	ProgramId                int        `json:"program_id"`
+}
 
-	VoucherName              string    `json:"voucher_name"`
-	StartDate                time.Time `json:"start_date"`
-	EndDate                  time.Time `json:"end_date"`
-	VoucherDescription       string    `json:"voucher_description"`
-	VoucherTermsAndCondition string    `json:"voucher_terms_and_condition"`
-	IsPushNotification       bool      `json:"is_push_notification"`
-	IsGiveVoucher            bool      `json:"is_give_voucher"`
-	VoucherPeriod            string    `json:"voucher_period"`
-	RewardTermsAndCondition  string    `json:"reward_terms_and_condition"`
-	BackgroundVoucherPattern string    `json:"background_voucher"`
-	BackgroundVoucherColour  string    `json:"background_voucher_colour"`
+type Province struct{
+	IdProvince int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id_province"`
+	ProvinceName string `json:"province_name"`
+}
 
-	MerchantId string `json:"merchant_id"`
-	OutletId   string `json:"outlet_id"`
-	ProgramId  int `json:"program_id"`
+type City struct {
+	IdProvince int `json:"id_province"`
+	IdCity int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id_city"`
+	CityName string `json:"city_name"`
 }

@@ -739,6 +739,33 @@ var card = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var provinceType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Province",
+	Fields: graphql.Fields{
+		"id_province": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"province_name": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var cityType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "City",
+	Fields: graphql.Fields{
+		"id_province": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"id_city": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"city_name": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
 var voucher = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Voucher",
 	Fields:graphql.Fields{

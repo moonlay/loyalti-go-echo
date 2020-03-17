@@ -102,6 +102,38 @@ func SocialMediaResolver(p graphql.ResolveParams) (interface{}, error) {
 	return sosmed, nil
 }
 
+func ProvinceResolver (p graphql.ResolveParams) (interface{}, error){
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
+	if ok && sip && top {
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		province := repository.GetProvince(pages, sizes, sorts)
+		fmt.Println(province)
+		return province, nil
+	}
+	province := repository.GetProvince(nil, nil, nil)
+	return province, nil
+}
+
+func CityResolver (p graphql.ResolveParams) (interface{}, error){
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
+	if ok && sip && top {
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		province := repository.GetCity(pages, sizes, sorts)
+		fmt.Println(province)
+		return province, nil
+	}
+	province := repository.GetCity(nil, nil, nil)
+	return province, nil
+}
+
 func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
