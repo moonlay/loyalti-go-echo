@@ -104,6 +104,39 @@ func NewRoot() *Root {
 						},
 						Resolve: SocialMediaResolver,
 					},
+
+					"province": &graphql.Field{
+						Type: graphql.NewList(provinceType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: ProvinceResolver,
+					},
+
+					"city": &graphql.Field{
+						Type: graphql.NewList(cityType),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type:graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: CityResolver,
+					},
+
 					"program": &graphql.Field{
 						Type: graphql.NewList(programType),
 						Args: graphql.FieldConfigArgument{
