@@ -31,7 +31,7 @@ func PublishDeleteSpecial(c echo.Context) error {
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
-	producer, err := sarama.NewSyncProducer([]string{"11.11.5.146:9092"}, kafkaConfig)
+	producer, err := sarama.NewSyncProducer([]string{"20.44.216.170:9092"}, kafkaConfig)
 
 	if err != nil {
 

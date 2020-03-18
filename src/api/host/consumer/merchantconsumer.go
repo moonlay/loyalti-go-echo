@@ -28,6 +28,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 		// this only consumes partition no 1, you would probably want to consume all partitions
 		consumer, err := master.ConsumePartition(topic, partitions[0], sarama.OffsetNewest)
 		if nil != err {
+			fmt.Println("error merchant : ", err.Error())
 			fmt.Printf("Topic %v Partitions: %v", topic, partitions)
 			panic(err)
 		}
@@ -114,7 +115,7 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 
 func NewMerchantConsumer() {
 
-	brokers := []string{"11.11.5.146:9092"}
+	brokers := []string{"20.44.216.170:9092"}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 

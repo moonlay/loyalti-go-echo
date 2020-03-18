@@ -371,12 +371,12 @@ type Voucher struct {
 }
 
 type Province struct{
-	IdProvince int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id_province"`
+	Id int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	ProvinceName string `json:"province_name"`
 }
 
 type City struct {
 	IdProvince int `json:"id_province"`
-	IdCity int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id_city"`
+	Id int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	CityName string `json:"city_name"`
 }

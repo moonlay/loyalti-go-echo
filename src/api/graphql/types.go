@@ -757,7 +757,7 @@ var cityType = graphql.NewObject(graphql.ObjectConfig{
 		"id_province": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"id_city": &graphql.Field{
+		"id": &graphql.Field{
 			Type: graphql.Int,
 		},
 		"city_name": &graphql.Field{
