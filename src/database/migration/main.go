@@ -8,7 +8,7 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-	city := model.City{}
+	city := model.Province{}
 	db.AutoMigrate(&city)
 }
 
