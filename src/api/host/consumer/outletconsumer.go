@@ -78,7 +78,7 @@ func consumeOutlet(topics []string, master sarama.Consumer) (chan *sarama.Consum
 
 func NewOutletConsumer() {
 
-	brokers := []string{"20.44.216.170:9092"}
+	brokers := []string{"20.44.219.52:9092"}
 
 	//kafkaConfig := consumer.getKafkaConfig("", "")
 	kafkaConfig := Config.GetKafkaConfig("", "")

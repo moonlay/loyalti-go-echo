@@ -82,7 +82,7 @@ func consumeProgram(topics []string, master sarama.Consumer) (chan *sarama.Consu
 
 func NewProgramConsumer() {
 
-	brokers := []string{"20.44.216.170:9092"}
+	brokers := []string{"20.44.219.52:9092"}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 

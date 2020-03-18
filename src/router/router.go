@@ -12,7 +12,6 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Voucher"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/getToken"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/middlewares"
 	"net/http"
 )
@@ -40,7 +39,7 @@ func New() *echo.Echo {
 	api.JwtGroup(jwtGroup)
 
 	e.GET("/ping", Ping)
-	host.StartKafka()
+	//host.StartKafka()
 
 	//Kafka Merchant
 	e.POST("/create-merchant", Merchant.PublishCreateMerchant)
