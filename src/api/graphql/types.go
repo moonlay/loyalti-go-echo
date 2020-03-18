@@ -742,7 +742,7 @@ var card = graphql.NewObject(graphql.ObjectConfig{
 var provinceType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Province",
 	Fields: graphql.Fields{
-		"id_province": &graphql.Field{
+		"id": &graphql.Field{
 			Type: graphql.Int,
 		},
 		"province_name": &graphql.Field{
