@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Merchant"
@@ -11,6 +12,11 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/SpecialProgram"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Voucher"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
+
+	//"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
+
+	//"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/getToken"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/middlewares"
 	"net/http"
@@ -84,6 +90,12 @@ func New() *echo.Echo {
 	//Get Token
 	e.POST("/getToken", getToken.RouterGetToken)
 	e.GET("/processToken", getToken.RouterProcessToken)
+
+	//Post FCM
+	e.POST("/getFCM", fcm.PushNotification)
+
+	//Send Mail SendGrid
+	e.POST("/SendMail", SendGrid.SendMail)
 
 	return e
 }
