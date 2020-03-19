@@ -30,7 +30,7 @@ func NewRoot() *Root {
 						Resolve: SongResolver,
 					},
 					"merchant": &graphql.Field{
-						Type: graphql.NewList(merchantType),
+						Type: graphql.NewList(merchantCommandType),
 						Args: graphql.FieldConfigArgument{
 							"page": &graphql.ArgumentConfig{
 								Type: graphql.Int,

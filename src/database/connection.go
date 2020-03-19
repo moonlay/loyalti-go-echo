@@ -19,6 +19,7 @@ type Conn struct {
 }
 
 type Connection struct {
+	
 }
 
 //func ConnectionDB() *gorm.DB{

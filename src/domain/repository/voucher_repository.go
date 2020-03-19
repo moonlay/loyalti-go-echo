@@ -64,20 +64,32 @@ func GetVoucher (page *int, size *int, sort *int, merchant_id *int) []model.Vouc
 	db := database.ConnectionDB()
 	var voucher []model.Voucher
 	db.Find(&voucher)
-
-	if sort != nil {
-		switch *sort {
-		case 1:
-			if size != nil && page != nil {
+		if page == nil && size == nil && sort == nil && merchant_id == nil {
+			db.Model(&voucher).Find(&voucher)
+		}
+		if page != nil && size != nil && sort == nil && merchant_id == nil {
+			fmt.Println("masuk ke 2")
+			db.Model(&voucher).Find(&voucher)
+			pagination.Paging(&pagination.Param{
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
+				OrderBy: []string{"voucher_name asc"},
+			}, &voucher)
+		}
+		if page != nil && size != nil && sort != nil && merchant_id == nil {
+			fmt.Println("masuk ke 3")
+			switch *sort {
+			case 1 :
+				db.Model(&voucher).Find(&voucher)
 				pagination.Paging(&pagination.Param{
 					DB:      db,
 					Page:    *page,
 					Limit:   *size,
-					OrderBy: []string{"voucher_name desc"},
+					OrderBy: []string{"voucher_name asc"},
 				}, &voucher)
-			}
-		case 2:
-			if size != nil && page != nil {
+			case 2:
+				db.Model(&voucher).Find(&voucher)
 				pagination.Paging(&pagination.Param{
 					DB:      db,
 					Page:    *page,
@@ -86,22 +98,28 @@ func GetVoucher (page *int, size *int, sort *int, merchant_id *int) []model.Vouc
 				}, &voucher)
 			}
 		}
-	}
-
-	if merchant_id != nil {
-		if page != nil && size != nil {
-			pagination.Paging(&pagination.Param{
-				DB:      db,
-				Page:    *page,
-				Limit:   *size,
-				OrderBy: []string{"voucher_name asc"},
-			}, &voucher)
-			db.Order("merchant_id").Where("merchant_id = ?", merchant_id).Find(&voucher)
-
-		} else {
-			db.Order("merchant_id").Where("merchant_id = ?", merchant_id).Find(&voucher)
+		if page != nil && size != nil && sort != nil && merchant_id != nil {
+			fmt.Println("masuk ke 4")
+			switch *sort {
+			case 1 :
+				db.Model(&voucher).Where("merchant_id = ?", merchant_id).Find(&voucher)
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"voucher_name asc"},
+				}, &voucher)
+			case 2:
+				db.Model(&voucher).Where("merchant_id = ?", merchant_id).Find(&voucher)
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"voucher_name asc"},
+				}, &voucher)
+			}
 		}
-	}
+
 	db.Close()
 	return voucher
 }

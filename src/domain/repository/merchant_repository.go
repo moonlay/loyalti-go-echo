@@ -3,12 +3,12 @@ package repository
 import (
 	"bytes"
 	"crypto/tls"
+	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/jinzhu/gorm"
 
 	"encoding/json"
 	"fmt"
 
-	"github.com/biezhi/gorm-paginator/pagination"
 	_ "github.com/go-sql-driver/mysql"
 
 	_ "github.com/jinzhu/gorm/dialects/mssql"
@@ -252,66 +252,67 @@ func DeleteMerchant2(newmerchant *model.NewMerchantCommand) string {
 	return "berhasil dihapus"
 }
 
-func GetMerchant(page *int, size *int, sort *int, email *string, id *int) []model.Merchant {
-
+func GetMerchant(page *int, size *int, sort *int, email *string) []model.Merchant {
+	fmt.Println("masuk ke Fungsi Get")
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var merchant []model.Merchant
 	db.Find(&merchant)
 
-	if sort != nil {
+	if page == nil && size == nil && sort == nil && email == nil {
+		fmt.Println("masuk 1")
+		db.Model(&merchant).Find(&merchant)
+	}
+
+	if page != nil && size != nil && sort != nil && email == nil {
+		fmt.Println("masuk 2", email)
+		db.Find(&merchant)
 		switch *sort {
-		case 1:
-			if size != nil && page != nil {
+		case 1 :
 				pagination.Paging(&pagination.Param{
 					DB:      db,
 					Page:    *page,
 					Limit:   *size,
 					OrderBy: []string{"merchant_name desc"},
 				}, &merchant)
-			}
-		case 2:
-			if size != nil && page != nil {
+
+		case 2 :
 				pagination.Paging(&pagination.Param{
 					DB:      db,
 					Page:    *page,
 					Limit:   *size,
 					OrderBy: []string{"merchant_name asc"},
 				}, &merchant)
-			}
 		}
 	}
 
-	if email != nil {
-		if page != nil && size != nil {
+	if page != nil && size != nil && sort != nil && email != nil {
+		fmt.Println("masuk 3")
+		db.Model(&merchant).Where("merchant_email = ? ", email).Find(&merchant)
+		switch *sort {
+		case 1 :
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"merchant_name desc"},
+				}, &merchant)
+		case 2 :
 			pagination.Paging(&pagination.Param{
 				DB:      db,
 				Page:    *page,
 				Limit:   *size,
 				OrderBy: []string{"merchant_name asc"},
 			}, &merchant)
-			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
-
-		} else {
-			db.Order("id").Where("merchant_email = ?", email).Find(&merchant)
 		}
 	}
 
-	if id != nil {
-		if page != nil && size != nil {
-			pagination.Paging(&pagination.Param{
-				DB:      db,
-				Page:    *page,
-				Limit:   *size,
-				OrderBy: []string{"merchant_name asc"},
-			}, &merchant)
-			db.Order("id").Where("id = ?", id).Find(&merchant)
-
-		} else {
-			db.Order("id").Where("id = ?", id).Find(&merchant)
-		}
+	if page == nil && size == nil && sort == nil && email != nil {
+		fmt.Println("masuk 4")
+		db.Model(&merchant).Where("merchant_email =  ?", email).Find(&merchant)
 	}
 
-	db.Close()
+
+
 	return merchant
 }

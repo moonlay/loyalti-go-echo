@@ -11,42 +11,42 @@ import (
 type Song model.Song
 
 func MerchantResolver(p graphql.ResolveParams) (interface{}, error) {
+	fmt.Println("masuk ke merchant resolver")
 	page, ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
 	email, mail := p.Args["email"].(string)
 	sort, tap := p.Args["sort"].(int)
-	merchantid, id := p.Args["id"].(int)
 	if ok && sip && tap{
 		var pages *int = &page
 		var sizes *int = &size
 		var sorts *int = &sort
-		merchant := repository.GetMerchant(pages, sizes, sorts, nil, nil)
+		merchant := repository.GetMerchant(pages, sizes, sorts, nil)
 		fmt.Println(merchant)
 		return merchant, nil
 
-	} else if ok && sip && mail {
+	} else if ok && sip && mail && tap{
+		fmt.Println("masuk kesini")
 		var pages *int = &page
 		var sizes *int = &size
+		var sorts *int = &sort
 		var emails *string = &email
-		merchant := repository.GetMerchant(pages,sizes,nil,emails,nil)
+		merchant := repository.GetMerchant(pages,sizes,sorts,emails)
+		fmt.Println("email ;: ",emails)
 		return merchant,nil
-
-	} else if ok && sip && id{
+	}  else if ok && sip && tap {
+		fmt.Println("eh rupanya kesini")
 		var pages *int = &page
 		var sizes *int = &size
-		var merchantid *int = &merchantid
-		merchant := repository.GetMerchant(pages,sizes,nil,nil,merchantid)
+		var sorts *int = &sort
+		merchant := repository.GetMerchant(pages, sizes, sorts, nil)
 		return merchant, nil
-
-	} else if ok && sip {
-		var pages *int = &page
-		var sizes *int = &size
-		merchant := repository.GetMerchant(pages,sizes,nil,nil,nil)
-		return merchant,nil
+	} else if mail {
+		var emails *string = &email
+		merchant := repository.GetMerchant(nil, nil, nil, emails)
+		return merchant, nil
 	}
 
-
-	merchant := repository.GetMerchant(nil, nil, nil, nil, nil)
+	merchant := repository.GetMerchant(nil, nil, nil, nil)
 	fmt.Println(merchant)
 	return merchant, nil
 }
@@ -265,8 +265,7 @@ func EmployeeResolver(p graphql.ResolveParams) (interface{}, error) {
 	} else if ok && sip{
 		var paging *int = &page
 		var sizing *int = &size
-		var sorting *int = &sort
-		employee := repository.GetEmployee(paging, sizing, sorting)
+		employee := repository.GetEmployee(paging, sizing, nil)
 		return employee,nil
 	}
 	employee := repository.GetEmployee(nil,nil, nil)
@@ -362,11 +361,6 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	var outlet []model.Card
 
-	if (card_type == "Member"){
-		fmt.Println("masuk ke if member")
-		outlet =  repository.GetCardMember(id)
-	}
-
 	fmt.Println("keluar dari if member")
 
 	if ok && sip && top && tipe{
@@ -375,6 +369,10 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 		var sizes *int = &size
 		var top *int = &id
 		var types *string = &card_type
+		if (card_type == "Member"){
+			fmt.Println("masuk ke if member")
+			outlet =  repository.GetCardMember(id)
+		}
 		outlet := repository.GetCardMerchant(pages, sizes, top, types)
 		return outlet, nil
 	} else if ok && sip && top{
@@ -392,10 +390,17 @@ func CardResolver(p graphql.ResolveParams) (interface{}, error) {
 		var sizing *int = &size
 		outlet := repository.GetCardMerchant(paging, sizing, nil, nil)
 		return outlet,nil
+	} else if ok && sip && top {
+		fmt.Println("masuk ke if keempat")
+		var paging *int = &page
+		var sizing *int = &size
+		var program_id *int = &id
+		outlet := repository.GetCardMerchant(paging, sizing, program_id, nil)
+		return outlet,nil
 	}
 	fmt.Println("lewat semua")
-	//outlet := repository.GetCardMerchant(nil,nil, nil, nil)
-
+	outlet = repository.GetCardMerchant(nil,nil, nil, nil)
+	fmt.Println(outlet)
 	return outlet, nil
 }
 
@@ -413,9 +418,23 @@ func VoucherResolver (p graphql.ResolveParams) (interface{}, error) {
 		fmt.Println(voucher)
 		return voucher, nil
 	}
+	if ok && sip{
+		var pages *int = &page
+		var sizes *int = &size
+		voucher := repository.GetVoucher(pages, sizes, nil, nil)
+		fmt.Println(voucher)
+		return voucher, nil
+	}
+	if ok && sip && top && tap{
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		voucher := repository.GetVoucher(pages, sizes, sorts, nil)
+		fmt.Println(voucher)
+		return voucher, nil
+	}
 
 	voucher := repository.GetVoucher(nil, nil, nil, nil)
-
 	return voucher, nil
 }
 

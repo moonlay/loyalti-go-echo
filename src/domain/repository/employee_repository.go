@@ -115,30 +115,44 @@ func GetEmployee(page *int, size *int, sort *int) []model.Employee {
 	var employee []model.Employee
 	db.Find(&employee)
 
+	if  page == nil && size == nil && sort == nil {
+		db.Model(&employee).Find(&employee)
+	}
 
+	if page != nil && size != nil && sort == nil {
+		fmt.Println("masuk 2")
+		db.Model(&employee).Find(&employee)
+		pagination.Paging(&pagination.Param{
+			DB:      db,
+			Page:    *page,
+			Limit:   *size,
+			OrderBy: []string{"employee_name asc"},
+		}, &employee)
+	}
 
-	if sort != nil {
+	if page != nil && size != nil && sort != nil {
 		switch *sort {
-		case 1:
-			if size != nil && page != nil {
-				pagination.Paging(&pagination.Param{
-					DB:      db,
-					Page:    *page,
-					Limit:   *size,
-					OrderBy: []string{"employee_name desc"},
-				}, &employee)
-			}
+		case 1 :
+			fmt.Println("masuk 3")
+			db.Model(&employee).Find(&employee)
+			pagination.Paging(&pagination.Param{
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
+				OrderBy: []string{"employee_name asc"},
+			}, &employee)
 		case 2:
-			if size != nil && page != nil {
-				pagination.Paging(&pagination.Param{
-					DB:      db,
-					Page:    *page,
-					Limit:   *size,
-					OrderBy: []string{"employee_name asc"},
-				}, &employee)
-			}
+			fmt.Println("masuk 4")
+			db.Model(&employee).Find(&employee)
+			pagination.Paging(&pagination.Param{
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
+				OrderBy: []string{"employee_name desc"},
+			}, &employee)
 		}
 	}
+
 	db.Close()
 	return employee
 }
