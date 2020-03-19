@@ -3,6 +3,7 @@ package repository
 import (
 	"database/sql"
 	"fmt"
+	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/jinzhu/gorm"
 	"github.com/radyatamaa/loyalti-go-echo/src/database"
 	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
@@ -334,12 +335,25 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		case 1:
 			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"merchant_name asc"},
+				}, &rows)
 				if err != nil {
+
 					panic(err)
 				}
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created asc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"created asc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
@@ -347,12 +361,24 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		case 2:
 			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"created desc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"created desc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
@@ -360,12 +386,24 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		case 3:
 			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"program_name asc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name asc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"program_name asc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
@@ -373,20 +411,48 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 		case 4:
 			if page != nil && size != nil && category == nil{
 				rows, err = db.Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"program_name desc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
 			}
 			if category != nil && page != nil && size != nil{
 				rows, err = db.Where("category_id = ?", category).Find(&program).Order("program_name desc").Count(total).Limit(*size).Offset(*page).Rows()
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"program_name desc"},
+				}, &rows)
 				if err != nil {
 					panic(err)
 				}
+			}
+		case 5:
+			if page != nil && size != nil {
+				db.Model(&program).Find(&program)
+				pagination.Paging(&pagination.Param{
+					DB:      db,
+					Page:    *page,
+					Limit:   *size,
+					OrderBy: []string{"program_name desc"},
+				}, &rows)
 			}
 		}
 	}else {
 		if page != nil && size != nil {
 			rows, err = db.Find(&program).Order("created desc").Count(total).Limit(*size).Offset(*page).Rows()
+			pagination.Paging(&pagination.Param{
+				DB:      db,
+				Page:    *page,
+				Limit:   *size,
+				OrderBy: []string{"created desc"},
+			}, &rows)
 			if err != nil {
 				panic(err)
 			}
@@ -397,9 +463,16 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			}
 		}
 	}
+
 	if id != nil {
 		rows, err = db.Where("id = ?", id).First(&program).Rows()
-		if err != nil{
+		pagination.Paging(&pagination.Param{
+			DB:      db,
+			Page:    *page,
+			Limit:   *size,
+			OrderBy: []string{"program_name asc"},
+		}, &rows)
+		if err != nil {
 			panic(err)
 		}
 	}
