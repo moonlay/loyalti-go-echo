@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "51e9ede1-a33e-4e6e-9d9a-d7ab1e9de65c",
+		"name": "graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    voucher{\n        voucher_name\n        start_date\n        end_date\n        voucher_description\n        voucher_terms_and_condition\n        is_push_notification\n        is_give_voucher\n        voucher_period\n        reward_terms_and_condition\n        background_voucher_pattern\n        background_voucher_colour\n        merchant_id\n        outlet_id\n        program_id\n    }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -370,13 +370,32 @@ type Voucher struct {
 	ProgramId                int        `json:"program_id"`
 }
 
-type Province struct{
-	Id int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+type Province struct {
+	Id           int    `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
 	ProvinceName string `json:"province_name"`
 }
 
 type City struct {
-	IdProvince int `json:"id_province"`
-	Id int `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
-	CityName string `json:"city_name"`
+	IdProvince int    `json:"id_province"`
+	Id         int    `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	CityName   string `json:"city_name"`
+}
+
+type Reward struct {
+	Id                string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Created           time.Time  `json:"created"`
+	CreatedBy         string     `json:"created_by"`
+	Modified          time.Time  `json:"modified"`
+	ModifiedBy        string     `json:"modified_by"`
+	Active            bool       `json:"active"`
+	IsDeleted         bool       `json:"is_deleted"`
+	Deleted           *time.Time `json:"deleted"`
+	DeletedBy         string     `json:"deleted_by"`
+	RedeemPoints      int        `json:"redeem_points"`
+	RewardName        string     `json:"reward_name"`
+	RedeemRules       string     `json:"redeem_rules"`
+	TermsAndCondition string     `json:"terms_and_condition"`
+	ProgramId         int        `json:"program_id"`
+	MerchantId        int        `json:"merchant_id"`
+	OutletId          int        `json:"outlet_id"`
 }

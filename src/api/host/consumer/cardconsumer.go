@@ -78,7 +78,7 @@ func consumeCard(topics []string, master sarama.Consumer) (chan *sarama.Consumer
 
 func NewCardConsumer() {
 
-	brokers := []string{"20.44.219.52:9092"}
+	brokers := []string{"10.152.183.155:9092"}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 

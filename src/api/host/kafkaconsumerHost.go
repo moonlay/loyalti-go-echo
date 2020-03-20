@@ -13,4 +13,5 @@ func StartKafka() {
 	go consumer.NewSpecialConsumer()
 	go consumer.NewTransactionConsumer()
 	go consumer.NewVoucherConsumer()
+	go consumer.NewRewardConsumer()
 }
