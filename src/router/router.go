@@ -12,6 +12,7 @@ import (
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/SpecialProgram"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Voucher"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Reward"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
 
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
@@ -86,6 +87,10 @@ func New() *echo.Echo {
 	e.POST("/create-voucher", Voucher.PublishCreateVoucher)
 	e.POST("/update-voucher", Voucher.PublishUpdateVoucher)
 	e.POST("/delete-voucher", Voucher.PublishDeleteTransaction)
+
+	e.POST("/create-reward", Reward.PublishCreateReward)
+	e.POST("/update-reward", Reward.PublishUpdateReward)
+	e.POST("/delete-reward", Reward.PublishUpdateReward)
 
 	//Get Token
 	e.POST("/getToken", getToken.RouterGetToken)

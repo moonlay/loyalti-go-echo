@@ -829,6 +829,9 @@ var voucher = graphql.NewObject(graphql.ObjectConfig{
 		"background_voucher_colour": &graphql.Field{
 			Type:graphql.String,
 		},
+		"background_voucher_pattern": &graphql.Field{
+			Type:graphql.String,
+		},
 		"merchant_id": &graphql.Field{
 			Type:graphql.String,
 		},
@@ -841,3 +844,56 @@ var voucher = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+var reward = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Reward",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"deleted": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"redeem_points": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"reward_point": &graphql.Field{
+			Type: graphql.String,
+		},
+		"redeem_rules": &graphql.Field{
+			Type:graphql.String,
+		},
+		"terms_and_condition" : &graphql.Field{
+			Type:graphql.String,
+		},
+		"program_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"merchant_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+		"outlet_id": &graphql.Field{
+			Type:graphql.Int,
+		},
+	},
+})

@@ -8,8 +8,8 @@ import (
 
 func main() {
 	db := database.ConnectionDB()
-	city := model.Province{}
-	db.AutoMigrate(&city)
+	reward := model.Reward{}
+	db.AutoMigrate(&reward)
 }
 
 
