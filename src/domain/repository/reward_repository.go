@@ -25,7 +25,7 @@ func DeleteReward (reward *model.Reward) string {
 	if err != nil {
 		db.Model(&reward).Where("id = ?",reward.Id).Update("is_deleted", true)
 	}
-
+	return "Berhasil dihapus"
 }
 
 func GetReward (page *int, size *int , sort *int, merchant_id *int ){

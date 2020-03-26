@@ -172,12 +172,12 @@ func TotalChop(id int, pay int, pin string, outletid string, cardtype string) []
 		}
 
 		if pay >= *(program.MinPayment){
-		var total = pay / pay * 1
-		t := &model.TotalChop{}
-		t.Total = total
-		updatechop := append(totalchop, *t)
-		fmt.Printf("Customer mendapatkan %d chop \n", total)
-		return updatechop
+			var total = pay / pay * 1
+			t := &model.TotalChop{}
+			t.Total = total
+			updatechop := append(totalchop, *t)
+			fmt.Printf("Customer mendapatkan %d chop \n", total)
+			return updatechop
 		}
 	}
 	return nil
@@ -290,7 +290,7 @@ func (p *repoProgram) GetProgram(page *int, size *int, sort *int, category *int,
 			&t.ProgramEndDate,
 			&t.ProgramDescription,
 			&t.Card,
-			&t.OutletID,
+			//&t.OutletID,
 			&t.MerchantId,
 			&t.CategoryId,
 			&t.Benefit,
@@ -322,7 +322,7 @@ func (p *repoProgram) GetProgram(page *int, size *int, sort *int, category *int,
 }
 
 func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model.Program {
-
+	fmt.Println("masuk ke Get Program")
 	db := database.ConnectionDB()
 	//db := database.ConnectPostgre()
 	var program []model.Program
@@ -513,6 +513,12 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			&t.QRCodeId,
 			&t.ProgramPoint,
 			&t.MinPayment,
+			&t.IsReqBillNumber,
+			&t.IsReqTotalTransaction,
+			&t.IsPushNotification,
+			&t.IsLendCard,
+			&t.IsGiveCard,
+			&t.IsReqTotalTransaction,
 		)
 
 		//add alert
@@ -528,7 +534,7 @@ func GetProgram(page *int, size *int, sort *int, category *int, id *int) []model
 			return nil
 		}
 		result = append(result,*t)
-		}
-		db.Close()
-	return result
 	}
+	db.Close()
+	return result
+}

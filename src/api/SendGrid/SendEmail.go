@@ -1,40 +1,27 @@
 package SendGrid
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
-	"github.com/labstack/echo"
+	//"github.com/labstack/echo"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
-
+	"github.com/radyatamaa/loyalti-go-echo/src/domain/model"
 )
 
-type Email struct {
-	//Sender      string   `json:"sender"`
-	Receiver    []ReceiverStruct `json:"receiver"`
-	Subject     string           `json:"subject"`
-	Body        string           `json:"body"`
-	TextContent string           `json:"text_content"`
-}
 
-type ReceiverStruct struct {
-	Email string `json:"email"`
-	Name  string `json:"name"`
-}
-
-
-func SendMail(c echo.Context) error{
+func SendMail(email model.Email) error {
 	fmt.Println("Masuk ke SendGrid")
-	var e Email
-	err := json.NewDecoder(c.Request().Body).Decode(&e)
-	if err != nil {
-		fmt.Println("Error SendGrid : ", err.Error())
-	}
+	e := email
+	//err := json.NewDecoder(c.Request().Body).Decode(&e)
+	//if err != nil {
+	//	fmt.Println("Error SendGrid : ", err.Error())
+	//}
 
 	//var e Email
-	var a = "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"
+	var a = "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"
 
-	from := mail.NewEmail("LOYALTIExpress", "felixsiburian10@gmail.com")
+	from := mail.NewEmail(e.SenderName, e.SenderEmail)
 	subject := e.Subject
 	for i := range e.Receiver {
 		fmt.Println("masuk ke perulangan")
