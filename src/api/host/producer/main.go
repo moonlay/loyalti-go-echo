@@ -35,7 +35,7 @@ func main() {
 	producer, err := sarama.NewSyncProducer([]string{"11.11.5.146:9092"}, kafkaConfig)
 
 	if err != nil {
-
+	fmt.Println("Error : ", err.Error())
 		panic(err)
 
 	}
@@ -46,11 +46,34 @@ func main() {
 		}
 	}()
 
-	var newTopic = "update-transaction-topic"
+	var newTopic = "send-email-topic"
 
 	message := `{
-		"outlet_id":"2",
-		"total_transaction":7000
+		"sender_email":"felixsiburian10@gmail.com",
+	"sender_name":"LoyaltiExpress",
+    "receiver": [
+        {
+            "email": "hendroprabowo604@gmail.com",
+            "name": "hendro"
+        },
+        {
+            "email": "felixsiburian3@gmail.com",
+            "name": "felix"
+        },
+        {
+        	"email": "desykristinasiahaan@gmail.com",
+        	"name": "desy"
+        },
+        {
+        	"email":"desy.siahaan@moonlay.com",
+        	"name": "desy"
+        }
+        
+    ],
+    
+    "subject":"no-reply Test email",
+    "text_conten":"no reply",
+    "body":"ini dikirim dari send grid"
 	}`
 
 	//message := `{

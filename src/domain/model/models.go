@@ -216,13 +216,19 @@ type SpecialProgram struct {
 	OutletID           string     `json:"outlet_id"`
 	MerchantId         int        `json:"merchant_id"`
 	//MerchantName       string     `json:"merchant_name"`
-	CategoryId        int      `json:"category_id"`
-	Benefit           *string  `json:"benefit"`
-	TermsAndCondition *string  `json:"terms_and_condition"`
-	Tier              *string  `json:"tier"`
-	RedeemRules       *string  `json:"redeem_rules"`
-	RewardTarget      *float64 `json:"reward_target"`
-	QRCodeId          *string  `json:"qr_code_id"`
+	CategoryId            int      `json:"category_id"`
+	Benefit               *string  `json:"benefit"`
+	TermsAndCondition     *string  `json:"terms_and_condition"`
+	Tier                  *string  `json:"tier"`
+	RedeemRules           *string  `json:"redeem_rules"`
+	RewardTarget          *float64 `json:"reward_target"`
+	QRCodeId              *string  `json:"qr_code_id"`
+	IsReqBillNumber       bool     `json:"is_req_bill_number"`
+	IsReqTotalTransaction bool     `json:"is_req_total_transaction"`
+	IsPushNotification    bool     `json:"is_push_notification"`
+	IsLendCard            bool     `json:"is_lend_card"`
+	IsGiveCard            bool     `json:"is_give_card"`
+	IsWelcomeBonus        bool     `json:"is_welcome_bonus"`
 }
 
 type Product struct {
@@ -368,6 +374,7 @@ type Voucher struct {
 	MerchantId               string     `json:"merchant_id"`
 	OutletId                 string     `json:"outlet_id"`
 	ProgramId                int        `json:"program_id"`
+	isGive                   bool       `json:"is_give"`
 }
 
 type Province struct {
@@ -398,4 +405,18 @@ type Reward struct {
 	ProgramId         int        `json:"program_id"`
 	MerchantId        int        `json:"merchant_id"`
 	OutletId          int        `json:"outlet_id"`
+}
+
+type Email struct {
+	SenderEmail string           `json:"sender_email"`
+	SenderName  string           `json:"sender_name"`
+	Receiver    []ReceiverStruct `json:"receiver"`
+	Subject     string           `json:"subject"`
+	Body        string           `json:"body"`
+	TextContent string           `json:"text_content"`
+}
+
+type ReceiverStruct struct {
+	Email string `json:"email"`
+	Name  string `json:"name"`
 }

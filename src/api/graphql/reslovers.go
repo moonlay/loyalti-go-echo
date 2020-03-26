@@ -178,6 +178,7 @@ func SpecialProgramResolver(p graphql.ResolveParams) (interface{}, error) {
 
 //program function
 func ProgramResolver(p graphql.ResolveParams) (interface{}, error) {
+	fmt.Println("masuk ke resolver")
 	page,ok := p.Args["page"].(int)
 	size,sip := p.Args["size"].(int)
 	sort,deh := p.Args["sort"].(int)

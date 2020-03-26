@@ -352,9 +352,9 @@ var programType = graphql.NewObject(graphql.ObjectConfig{
 		"merchant_id": &graphql.Field{
 			Type: graphql.Int,
 		},
-		"merchant_name": &graphql.Field{
-			Type: graphql.String,
-		},
+		//"merchant_name": &graphql.Field{
+		//	Type: graphql.String,
+		//},
 		"category_id": &graphql.Field{
 			Type: graphql.Int,
 		},
@@ -531,6 +531,9 @@ var outletType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"outlet_hour": &graphql.Field{
 			Type: graphql.DateTime,
+		},
+		"timezone" : &graphql.Field {
+			Type:graphql.String,
 		},
 	},
 })

@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
+	//"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Merchant"
@@ -100,7 +100,7 @@ func New() *echo.Echo {
 	e.POST("/getFCM", fcm.PushNotification)
 
 	//Send Mail SendGrid
-	e.POST("/SendMail", SendGrid.SendMail)
+	//e.POST("/SendMail", SendGrid.SendMail)
 
 	return e
 }
