@@ -439,6 +439,29 @@ func VoucherResolver (p graphql.ResolveParams) (interface{}, error) {
 	return voucher, nil
 }
 
-//func MerchantResolve() {
-//
-//}
+func RewardResolver (p graphql.ResolveParams) (interface{}, error) {
+	fmt.Println("masuk ke resolver")
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	sort, top := p.Args["sort"].(int)
+	merchant_email, tap := p.Args["merchant_email"].(string)
+	if ok && sip && top && tap{
+		fmt.Println("masuk if 1")
+		var pages *int = &page
+		var sizes *int = &size
+		var sorts *int = &sort
+		var merchant_emails *string = &merchant_email
+		voucher := repository.GetReward(pages, sizes, sorts, merchant_emails)
+		fmt.Println(voucher)
+		return voucher, nil
+	}
+	if tap{
+		fmt.Println("masuk if 2")
+		var merchant_emails *string = &merchant_email
+		voucher := repository.GetReward(nil, nil, nil, merchant_emails)
+		fmt.Println(voucher)
+		return voucher, nil
+	}
+	voucher := repository.GetReward(nil, nil, nil, nil)
+	return voucher, nil
+}

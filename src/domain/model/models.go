@@ -389,7 +389,7 @@ type City struct {
 }
 
 type Reward struct {
-	Id                string     `gorm:"PRIMARY_KEY;NOT NULL"; json:"id"`
+	Id                string     `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"`
 	Created           time.Time  `json:"created"`
 	CreatedBy         string     `json:"created_by"`
 	Modified          time.Time  `json:"modified"`
@@ -403,8 +403,7 @@ type Reward struct {
 	RedeemRules       string     `json:"redeem_rules"`
 	TermsAndCondition string     `json:"terms_and_condition"`
 	ProgramId         int        `json:"program_id"`
-	MerchantId        int        `json:"merchant_id"`
-	OutletId          int        `json:"outlet_id"`
+	MerchantEmail     string     `json:"merchant_email"`
 }
 
 type Email struct {
@@ -419,4 +418,15 @@ type Email struct {
 type ReceiverStruct struct {
 	Email string `json:"email"`
 	Name  string `json:"name"`
+}
+
+type EmailEmployee struct {
+	SenderEmail   string `json:"sender_email"`
+	SenderName    string `json:"sender_name"`
+	EmployeeName  string `json:"employee_name"`
+	EmployeeEmail string `json:"employee_email"`
+	Subject       string `json:"subject"`
+	Body          string `json:"body"`
+	TextContent   string `json:"text_content"`
+	EmployeePin   string `json:"employee_pin"`
 }
