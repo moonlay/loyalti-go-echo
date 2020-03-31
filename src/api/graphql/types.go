@@ -883,6 +883,9 @@ var reward = graphql.NewObject(graphql.ObjectConfig{
 		"reward_point": &graphql.Field{
 			Type: graphql.String,
 		},
+		"reward_name": &graphql.Field{
+			Type:graphql.String,
+		},
 		"redeem_rules": &graphql.Field{
 			Type:graphql.String,
 		},

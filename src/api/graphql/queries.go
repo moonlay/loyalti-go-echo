@@ -308,6 +308,24 @@ func NewRoot() *Root {
 						},
 						Resolve:VoucherResolver,
 					},
+					"reward": &graphql.Field{
+						Type:graphql.NewList(reward),
+						Args:graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"sort": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"merchant_email": &graphql.ArgumentConfig{
+								Type: graphql.String,
+							},
+						},
+						Resolve:RewardResolver,
+					},
 				},
 			},
 		),
