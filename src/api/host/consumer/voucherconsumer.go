@@ -83,8 +83,7 @@ func consumeVoucher(topics []string, master sarama.Consumer) (chan *sarama.Consu
 
 func NewVoucherConsumer() {
 
-	brokers := []string{"10.152.183.155:9092"}
-
+	brokers := []string{"10.152.183.246:9092"}
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
