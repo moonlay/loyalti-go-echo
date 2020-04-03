@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/radyatamaa/loyalti-go-echo/src/router"
 	//"github.com/spf13/viper"
@@ -18,6 +19,8 @@ func main() {
 
 	fmt.Println("Welcome to the webserver")
 	e := router.New()
+	a := os.Getenv("KEY")
+	fmt.Println(a)
 	//c := echo.New()
 	//middlewares.SetCorsMiddlewares(c)
 

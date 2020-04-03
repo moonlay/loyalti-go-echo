@@ -3,6 +3,8 @@ package router
 import (
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
+
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
@@ -46,7 +48,7 @@ func New() *echo.Echo {
 	api.JwtGroup(jwtGroup)
 
 	e.GET("/ping", Ping)
-	//host.StartKafka()
+	host.StartKafka()
 
 	//Kafka Merchant
 	e.POST("/create-merchant", Merchant.PublishCreateMerchant)
