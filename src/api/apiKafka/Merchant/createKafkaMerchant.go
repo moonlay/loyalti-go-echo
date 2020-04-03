@@ -37,7 +37,7 @@ func PublishCreateMerchant(c echo.Context) error {
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
-	producer, err := sarama.NewSyncProducer([]string{"20.44.219.52:9092"}, kafkaConfig)
+	producer, err := sarama.NewSyncProducer([]string{"52.185.161.109:9092"}, kafkaConfig)
 
 	if err != nil {
 
