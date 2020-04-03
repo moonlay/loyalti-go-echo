@@ -82,7 +82,7 @@ func consumeSpecial(topics []string, master sarama.Consumer) (chan *sarama.Consu
 
 func NewSpecialConsumer() {
 
-	brokers := []string{"10.152.183.246:9092"}
+	brokers := []string{"52.185.161.109:9092"}
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
 	master, err := sarama.NewConsumer(brokers, kafkaConfig)
