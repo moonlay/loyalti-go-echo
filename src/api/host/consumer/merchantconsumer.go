@@ -46,14 +46,14 @@ func consume(topics []string, master sarama.Consumer) (chan *sarama.ConsumerMess
 					merchant := model.NewMerchantCommand{}
 					switch msg.Topic {
 					case "create-merchant-topic":
+						fmt.Println("masuk ke create merchant")
 						err := json.Unmarshal([]byte(msg.Value), &merchant)
 						if err != nil {
 							fmt.Println(err.Error())
 							os.Exit(1)
 						}
-						fmt.Println("ini hasilnya : ",merchant)
 						resp , err := repository.CreateMerchantWSO2(&merchant)
-						repository.CreateMerchantWSO2(&merchant)
+						repository.CreateMerchant2(&merchant)
 						fmt.Println("masuk ke fungsi WSO2")
 						if err != nil {
 							fmt.Println("Error :",err.Error())

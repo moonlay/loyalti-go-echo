@@ -13,8 +13,10 @@ type Song struct {
 }
 
 type AccountMerchant struct {
-	Username string `json:"userName"`
+	Id       string `json:"id"`
+	Username string `json:"username"`
 	Password string `json:"password"`
+	Email    string `json:"email"`
 }
 
 type ResponseProcess struct {

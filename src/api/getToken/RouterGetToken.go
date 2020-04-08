@@ -9,6 +9,7 @@ import (
 func RouterGetToken(c echo.Context) error {
 	//temp := model.ResponseCommand{}
 	fmt.Println("masuk ke router")
+
 	username := c.FormValue("username")
 	password := c.FormValue("password")
 	resp := GetToken(username, password)

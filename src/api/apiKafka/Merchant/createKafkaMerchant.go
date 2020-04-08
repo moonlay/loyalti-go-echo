@@ -18,7 +18,6 @@ func PublishCreateMerchant(c echo.Context) error {
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(data)
 
 	//if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {

@@ -1,20 +1,22 @@
 package router
 
 import (
+	"crypto/subtle"
+	"fmt"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
-
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Merchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Outlet"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Program"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Reward"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/SpecialProgram"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Voucher"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Reward"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
 
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
@@ -95,6 +97,16 @@ func New() *echo.Echo {
 	e.POST("/delete-reward", Reward.PublishUpdateReward)
 
 	//Get Token
+	e.Use(middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {
+		// Be careful to use constant time comparison to prevent timing attacks
+		if subtle.ConstantTimeCompare([]byte(username), []byte(username)) == 1 &&
+			subtle.ConstantTimeCompare([]byte(password), []byte(password)) == 1 {
+			fmt.Println("Username : ", username, "Password : ",  password)
+			return true, nil
+		}
+
+		return false, nil
+	}))
 	e.POST("/getToken", getToken.RouterGetToken)
 	e.GET("/processToken", getToken.RouterProcessToken)
 

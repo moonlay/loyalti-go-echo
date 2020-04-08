@@ -17,8 +17,8 @@ func GetToken(username string, password string) *model.Response {
 	respon := model.Response{}
 
 	fmt.Println("masuk ke getTOken")
-	apiUrl := "https://11.11.5.146:9443"
-	resource := "/oauth2/token"
+	apiUrl := "http://identityserver-loyalti.azurewebsites.net/connect/token"
+	//resource := "/connect/token"
 	data := url.Values{}
 	data.Set("grant_type", "password")
 	data.Add("username", username)
@@ -31,7 +31,7 @@ func GetToken(username string, password string) *model.Response {
 		fmt.Println("Error : ", err.Error())
 		os.Exit(1)
 	}
-	u.Path = resource
+	//u.Path = resource
 	urlStr := u.String()
 	fmt.Println("lewati u")
 
@@ -46,8 +46,9 @@ func GetToken(username string, password string) *model.Response {
 		fmt.Println("Error : ", err.Error())
 		os.Exit(1)
 	}
+	r.SetBasicAuth("roclient","secret")
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-	r.Header.Add("Authorization", "Basic cm1SSF95MmxqVUZfR0ZFWlFlX0xha09fWWl3YTpEYng1VG82YjFDQ2dMd2R1MWdaRHkzdnJ6YjRh")
+	//r.Header.Add("Authorization", "Basic cm9jbGllbnQ6c2VjcmV0")
 
 	fmt.Println("melewati header")
 
@@ -56,13 +57,26 @@ func GetToken(username string, password string) *model.Response {
 		fmt.Println("Error : ", err.Error())
 		os.Exit(1)
 	}
-	fmt.Println(resp.Status)
-	bodyBytes, _ := ioutil.ReadAll(resp.Body)
+
+	if resp.StatusCode != http.StatusOK {
+		fmt.Println("Error ini : ", resp.StatusCode)
+
+		//bytesResp, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println("Errornya" ,resp)
+		//fmt.Println(string(bytesResp))
+		//fmt.Println(bytesResp)
+		os.Exit(1)
+	}
+	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error ini : ", err.Error())
+	}
 	fmt.Println(string(bodyBytes))
 	err = json.Unmarshal([]byte(bodyBytes), &respon)
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 	}
 	fmt.Println("Respon Body : ", respon)
+	os.Exit(1)
 	return &respon
 }
