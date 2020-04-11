@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "51e9ede1-a33e-4e6e-9d9a-d7ab1e9de65c",
+		"name": "graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    merchant{\n        id\n        created\n        created_by\n        modified\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        merchant_name\n        merchant_email\n        merchant_phone_number\n        merchant_province\n        merchant_city\n        merchant_address\n        merchant_postal_code\n        merchant_category_id\n        merchant_website\n        merchant_media_social_id\n        merchant_description\n        merchant_image_profile\n        merchant_gallery\n    }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    outlet{\n        id\n        created\n        created_by\n        modified\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        outlet_name\n        outlet_address\n        outlet_phone\n        outlet_city\n        outlet_province\n        outlet_postal_code\n        outlet_longitude\n        outlet_latitude\n        outlet_day\n        outlet_hour\n        merchant_id\n        timezone\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    card{\n        id\n        created\n        created_by\n        modified\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        title\n        description\n        font_color\n        template_color\n        icon_image\n        terms_and_condition\n        benefit\n        valid_until\n        current_point\n        is_valid\n        program_id\n        card_type\n        icon_image_stamp\n        merchant_id\n        tier\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    employee{\n        id\n        created\n        created_by\n        modified\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        employee_name\n        employee_email\n        employee_pin\n        employee_role\n        outlet_id\n        outlet_name\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    voucher{\n        id\n        created\n        created_by\n        modified\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        voucher_name\n        start_date\n        end_date\n        voucher_description\n        voucher_terms_and_condition\n        is_push_notification\n        is_give_voucher\n        voucher_period\n        reward_terms_and_condition\n        background_voucher_pattern\n        background_voucher_colour\n        merchant_id\n        program_id\n        outlet_id\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": " https://loyalti-merchant-dev.azurewebsites.net/graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n    special{\n        id\n        created\n        created_by\n        modified_by\n        active\n        is_deleted\n        deleted\n        deleted_by\n        program_name\n        program_image\n        program_start_date\n        program_end_date\n        program_description\n        card\n        outlet_id\n        merchant_id\n        category_id\n        benefit\n        terms_and_condition\n        tier\n        redeem_rules\n        reward_target\n        qr_code_id\n      \n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://loyalti-merchant-dev.azurewebsites.net/graphql",
+					"protocol": "https",
+					"host": [
+						"loyalti-merchant-dev",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

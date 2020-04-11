@@ -27,13 +27,19 @@ type ResponseProcess struct {
 	UserId     string `json:"user_id"`
 }
 
+//type Response struct {
+//	Access_Token  string `json:"access_token"`
+//	Refresh_Token string `json:"refresh_token"`
+//	Scope         string `json:"scope"`
+//	Id_Token      string `json:"id_token"`
+//	Token_Type    string `json:"token_type"`
+//	Expires_In    int    `json:"expires_in"`
+//}
+
 type Response struct {
-	Access_Token  string `json:"access_token"`
-	Refresh_Token string `json:"refresh_token"`
-	Scope         string `json:"scope"`
-	Id_Token      string `json:"id_token"`
-	Token_Type    string `json:"token_type"`
-	Expires_In    int    `json:"expires_in"`
+	Access_Token string `json:"access_token"`
+	Expires_In int `json:"expires_in"`
+	Token_Type string `json:"token_type"`
 }
 
 type User struct {

@@ -83,7 +83,7 @@ func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, 
 	fmt.Println("ini isi bytes reader : ",)
 	fmt.Println(bytes.NewReader(data))
 	//os.Exit(1)
-	//req.Header.Set("Authorization", "Basic YWRtaW5AZ21haWwuY29tOmFkbWlu")
+	req.Header.Set("Authorization", "Basic YWRtaW5AZ21haWwuY29tOmFkbWlu")
 	req.Header.Set("Content-Type","application/json")
 	if err != nil {
 		fmt.Println("Error : ", err.Error())

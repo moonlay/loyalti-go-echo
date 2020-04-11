@@ -25,7 +25,7 @@ func GetToken(username string, password string) *model.Response {
 	data.Add("password", password)
 	data.Set("scope", "openid")
 	fmt.Println("berhasil dikirim")
-
+	fmt.Println(data)
 	u, err := url.ParseRequestURI(apiUrl)
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
@@ -33,6 +33,7 @@ func GetToken(username string, password string) *model.Response {
 	}
 	//u.Path = resource
 	urlStr := u.String()
+	fmt.Println("URLStr : ", urlStr)
 	fmt.Println("lewati u")
 
 	tr := &http.Transport{
@@ -53,6 +54,7 @@ func GetToken(username string, password string) *model.Response {
 	fmt.Println("melewati header")
 
 	resp, err := client.Do(r)
+	fmt.Println("isi R : ", r)
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 		os.Exit(1)
@@ -65,18 +67,18 @@ func GetToken(username string, password string) *model.Response {
 		fmt.Println("Errornya" ,resp)
 		//fmt.Println(string(bytesResp))
 		//fmt.Println(bytesResp)
-		os.Exit(1)
+		//os.Exit(1)
 	}
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error ini : ", err.Error())
 	}
-	fmt.Println(string(bodyBytes))
+	//fmt.Println(string(bodyBytes))
 	err = json.Unmarshal([]byte(bodyBytes), &respon)
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 	}
 	fmt.Println("Respon Body : ", respon)
-	os.Exit(1)
+	//os.Exit(1)
 	return &respon
 }
