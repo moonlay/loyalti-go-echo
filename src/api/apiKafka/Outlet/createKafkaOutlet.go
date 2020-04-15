@@ -11,6 +11,7 @@ import (
 )
 
 func PublishCreateOutlet(c echo.Context) error {
+	fmt.Println("Masuk ke publish outlet 123 123")
 	//var data model.Merchant
 	data := new(model.Outlet)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)

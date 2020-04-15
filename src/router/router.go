@@ -1,20 +1,23 @@
 package router
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/UploadToBlob"
 
+	//"github.com/radyatamaa/loyalti-go-echo/src/api/uploadToAzure"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Employee"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Merchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Outlet"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Program"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Reward"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/SpecialProgram"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/TransactionMerchant"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Voucher"
-	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Reward"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
 
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/fcm"
@@ -95,12 +98,26 @@ func New() *echo.Echo {
 	e.POST("/delete-reward", Reward.PublishUpdateReward)
 
 	//Get Token
+	//e.Use(middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {
+	//	// Be careful to use constant time comparison to prevent timing attacks
+	//	if subtle.ConstantTimeCompare([]byte(username), []byte(username)) == 1 &&
+	//		subtle.ConstantTimeCompare([]byte(password), []byte(password)) == 1 {
+	//		fmt.Println("Username : ", username, "Password : ",  password)
+	//		return true, nil
+	//	}
+	//
+	//	return false, nil
+	//}))
 	e.POST("/getToken", getToken.RouterGetToken)
 	e.GET("/processToken", getToken.RouterProcessToken)
 
 	//Post FCM
 	e.POST("/getFCM", fcm.PushNotification)
 
+	//Post Image to Blob
+	fmt.Println("masuk ini")
+	e.POST("/upload", UploadToBlob.ProcessImage)
+	fmt.Println("masuk ini")
 	//Send Mail SendGrid
 	//e.POST("/SendMail", SendGrid.SendMail)
 

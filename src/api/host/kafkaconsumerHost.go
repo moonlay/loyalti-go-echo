@@ -1,9 +1,11 @@
 package host
 
 import (
+	"fmt"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host/consumer"
 )
 func StartKafka() {
+	fmt.Println("Kafka jalan dpianggil dari main 1 aaa")
 	//consumer.NewReceiver()
 	go consumer.NewMerchantConsumer()
 	go consumer.NewOutletConsumer()

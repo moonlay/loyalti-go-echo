@@ -2,7 +2,7 @@ package repository
 
 import (
 	"bytes"
-	"crypto/tls"
+	"github.com/beevik/guid"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/jinzhu/gorm"
 
@@ -71,13 +71,15 @@ func CreateRepository(db *gorm.DB) Repository {
 
 func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, error) {
 	user := model.AccountMerchant{
+		Id: guid.NewString(),
 		Username: newmerchant.MerchantEmail,
 		Password: newmerchant.MerchantPassword,
+		Email: newmerchant.MerchantEmail,
 	}
 	data, _:= json.Marshal(user)
 	fmt.Println("Ini datanya : ",string(data))
 
-	req, err := http.NewRequest("POST", "https://11.11.5.146:9443/scim2/Users", bytes.NewReader(data))
+	req, err := http.NewRequest("POST", "https://identityserver-loyalti.azurewebsites.net/connect/register", bytes.NewReader(data))
 	fmt.Println("ini isi bytes reader : ",)
 	fmt.Println(bytes.NewReader(data))
 	//os.Exit(1)
@@ -88,19 +90,19 @@ func CreateMerchantWSO2(newmerchant *model.NewMerchantCommand) (*http.Response, 
 		os.Exit(1)
 	}
 
-	tr := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify:true},
-	}
+	//tr := &http.Transport{
+	//	TLSClientConfig: &tls.Config{InsecureSkipVerify:true},
+	//}
 
-	client := &http.Client{Transport: tr}
-
+	//client := &http.Client{Transport: tr}
+	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Println("Error : ", err.Error())
 		os.Exit(1)
 	}
 	fmt.Println("ini response : ", resp)
-
+	//os.Exit(1)
 	return resp, err
 }
 

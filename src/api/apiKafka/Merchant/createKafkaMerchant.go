@@ -11,6 +11,7 @@ import (
 )
 
 func PublishCreateMerchant(c echo.Context) error {
+	fmt.Println("masuk ke publish")
 	//var data model.Merchant
 	data := new(model.NewMerchantCommand)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
@@ -18,7 +19,6 @@ func PublishCreateMerchant(c echo.Context) error {
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Println(data)
 
 	//if len(data.MerchantEmail) == 0 && len(data.MerchantName) == 0 {

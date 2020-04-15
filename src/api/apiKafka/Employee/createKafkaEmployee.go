@@ -48,6 +48,7 @@ func PublishCreateEmployee(c echo.Context) error {
 	var newTopic = "create-employee-topic"
 
 	message, err := json.Marshal(data)
+	fmt.Println(message)
 	if err != nil {
 		fmt.Println("error marshal : ", err.Error())
 	}
