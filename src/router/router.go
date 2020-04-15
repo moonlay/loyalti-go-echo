@@ -1,8 +1,12 @@
 package router
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
 	"github.com/radyatamaa/loyalti-go-echo/src/api"
+	"github.com/radyatamaa/loyalti-go-echo/src/api/UploadToBlob"
+
+	//"github.com/radyatamaa/loyalti-go-echo/src/api/uploadToAzure"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/host"
 	//"github.com/radyatamaa/loyalti-go-echo/src/api/SendGrid"
 	"github.com/radyatamaa/loyalti-go-echo/src/api/apiKafka/Card"
@@ -110,6 +114,10 @@ func New() *echo.Echo {
 	//Post FCM
 	e.POST("/getFCM", fcm.PushNotification)
 
+	//Post Image to Blob
+	fmt.Println("masuk ini")
+	e.POST("/upload", UploadToBlob.ProcessImage)
+	fmt.Println("masuk ini")
 	//Send Mail SendGrid
 	//e.POST("/SendMail", SendGrid.SendMail)
 
